@@ -1,0 +1,142 @@
+# To find time complexity first try to simulate and dry-run these scripts on paper yourself. If you get stuck anywhere you can ask AI tools to help you in tracing the code not finding their complexity. 
+
+
+1. Real Life Context: Shopping Cart Total (List)
+# Used in e-commerce platforms to calculate the total price of items in a cart.
+
+cart_prices = [1200, 999, 450, 349, 799]
+
+def total_price(cart):
+    total = 0
+    for price in cart:
+        total += price
+    return total
+
+print("Total Bill:", total_price(cart_prices))
+
+
+
+2. Real Life Context: Vehicle Queue at Toll Plaza (Queue)
+# Used in traffic simulation systems to manage vehicles in queue order.
+
+from collections import deque
+
+vehicles = deque(["Car1", "Car2", "Truck", "Bus", "Car3"])
+
+def process_toll(queue):
+    while queue:
+        print(f"{queue.popleft()} passed the toll.")
+
+process_toll(vehicles)
+
+
+
+3. Real Life Context: Call Center Support Stack (Stack)
+# Used for managing "last call in, first call out" support logs.
+
+def support_stack(calls):
+    stack = []
+    for call in calls:
+        stack.append(call)
+        print(f"Received: {call}")
+    print("Resolving calls...")
+    while stack:
+        print(f"Resolved: {stack.pop()}")
+
+support_stack(["Call-A", "Call-B", "Call-C"])
+
+
+
+4. Real Life Context: Employee Hierarchy Tree (Binary Tree)
+# Used in organizational chart software or HR systems.
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.name)
+        preorder(node.left)
+        preorder(node.right)
+
+# Build Hierarchy
+ceo = Employee("CEO")
+ceo.left = Employee("Manager A")
+ceo.right = Employee("Manager B")
+ceo.left.left = Employee("Developer 1")
+ceo.left.right = Employee("Developer 2")
+
+preorder(ceo)
+
+
+
+5. Real Life Context: Social Network Friend Graph Graph (Adjacency List)
+# Modeling friendships or connections in social media networks.
+
+graph = {
+    "Alice": ["Bob", "Claire"],
+    "Bob": ["Annie", "Dennis"],
+    "Claire": ["Dennis"],
+    "Dennis": [],
+    "Annie": []
+}
+
+def bfs(start):
+    from collections import deque
+    visited = set()
+    q = deque([start])
+    while q:
+        person = q.popleft()
+        if person not in visited:
+            print(person)
+            visited.add(person)
+            q.extend(graph[person])
+
+bfs("Alice")
+
+
+
+6. Real Life Context: Warehouse Inventory (HashMap / Dictionary)
+# Track items and their quantities.
+
+inventory = {"Apples": 50, "Bananas": 30, "Oranges": 45}
+
+def restock(item, qty):
+    inventory[item] = inventory.get(item, 0) + qty
+
+restock("Apples", 10)
+restock("Mangoes", 20)
+print(inventory)
+
+
+
+7. Real Life Context: Hospital Patient Priority System (Heap)
+# Used for managing patients based on urgency.
+
+import heapq
+
+patients = [(2, "John"), (1, "Mary"), (3, "Tom")]
+heapq.heapify(patients)
+
+while patients:
+    priority, name = heapq.heappop(patients)
+    print(f"Treating patient {name} with priority {priority}")
+
+
+
+
+8. Real Life Context: Text Word Frequency (HashMap & List Sorting)
+# Used in search engines or text analyzers to rank word frequencies.
+
+text = "data structures and algorithms make computer science interesting"
+words = text.split()
+freq = {}
+
+for w in words:
+    freq[w] = freq.get(w, 0) + 1
+
+sorted_words = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+print(sorted_words)
