@@ -1,0 +1,132 @@
+# To find space complexity first try to simulate and dry-run these scripts on paper yourself. If you get stuck anywhere you can ask AI tools to help you in tracing the code not finding their space complexity. 
+
+1. Stack-based Parentheses Checker
+def is_balanced(expr):
+    stack = []
+    mapping = {')': '(', '}': '{', ']': '['}
+    for char in expr:
+        if char in mapping.values():
+            stack.append(char)
+        elif char in mapping:
+            if not stack or mapping[char] != stack.pop():
+                return False
+    return not stack
+
+print(is_balanced("{[()]}"))
+
+
+2. Queue Simulation (Task Processing)
+
+from collections import deque
+def process_tasks(tasks):
+    q = deque(tasks)
+    while q:
+        current = q.popleft()
+        print("Processing:", current)
+
+process_tasks(["Task1", "Task2", "Task3", "Task4"])
+
+
+3. Hash Map Frequency Counter
+def count_frequency(arr):
+    freq = {}
+    for num in arr:
+        freq[num] = freq.get(num, 0) + 1
+    return freq
+
+print(count_frequency([1, 2, 2, 3, 3, 3])) 
+
+
+4. 0. String Permutations (Recursion)
+
+def permute(s, l, r, result):
+    if l == r:
+        result.append("".join(s))
+    else:
+        for i in range(l, r + 1):
+            s[l], s[i] = s[i], s[l]
+            permute(s, l + 1, r, result)
+            s[l], s[i] = s[i], s[l]  # backtrack
+
+string = "ABC"
+result = []
+permute(list(string), 0, len(string)-1, result)
+print(result)
+
+
+5. Longest Common Subsequence
+def lcs(X, Y):
+    n, m = len(X), len(Y)
+    dp = [[0]*(m+1) for _ in range(n+1)]
+    for i in range(1, n+1):
+        for j in range(1, m+1):
+            if X[i-1] == Y[j-1]:
+                dp[i][j] = 1 + dp[i-1][j-1]
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    return dp[n][m]
+
+print(lcs("AGGTAB", "GXTXAYB"))
+
+
+6. BFS Traversal (Graph using Adjacency List)
+
+from collections import deque
+graph = {
+    0: [1, 2],
+    1: [2, 3],
+    2: [3],
+    3: [4],
+    4: []
+}
+
+def bfs(start):
+    visited = set()
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            print(node, end=' ')
+            visited.add(node)
+            queue.extend(graph[node])
+
+bfs(0)
+
+
+7. Fibonacci
+def fibonacci(n):
+    dp = [0]*(n+1)
+    dp[1] = 1
+    for i in range(2, n+1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+
+print(fibonacci(10))
+
+
+8. Binary Search Tree (Insertion + Traversal)
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def insert(root, key):
+    if root is None:
+        return Node(key)
+    if key < root.val:
+        root.left = insert(root.left, key)
+    else:
+        root.right = insert(root.right, key)
+    return root
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val, end=' ')
+        inorder(root.right)
+
+root = None
+for x in [50, 30, 70, 20, 40, 60, 80]:
+    root = insert(root, x)
+inorder(root)
