@@ -8,6 +8,7 @@
       "import heapq",
       "import bisect",
       "import random",
+      "MOD = 10**9 + 7",
       "input = sys.stdin.readline",
       "#hsh = random.randint(1, 1 << 32)",
       "from collections import defaultdict, Counter",
@@ -203,6 +204,30 @@
       "$0"
     ],
     "description": "2D Prefix sum query"
+  },
+  "Binary Exponentiation": {
+    "prefix": [
+      "power",
+      "binpow"
+    ],
+    "body": [
+      "def power(a, b):",
+      "    a %= MOD",
+      "    res = 1",
+      "",
+      "    while b > 0:",
+      "        if b & 1:  # odd",
+      "            res = (res * a) % MOD",
+      "",
+      "        # square base 3^1 -> 3^2 -> 3^4 -> 3^8",
+      "        a = (a * a) % MOD",
+      "",
+      "        b //= 2",
+      "",
+      "    return res",
+      ""
+    ],
+    "description": "Binary exponentiation / modular power"
   },
   "Snippet Help": {
     "scope": "python",

@@ -3,6 +3,7 @@ import math
 import heapq
 import bisect
 import random
+MOD = 10**9 + 7
 input = sys.stdin.readline
 #hsh = random.randint(1, 1 << 32)
 from collections import defaultdict, Counter
